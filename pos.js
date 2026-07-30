@@ -1,3 +1,5 @@
+requireAuth(['cashier', 'manager', 'admin']);
+renderUserBadge();
 
 let allProducts = [];
 let cart = []; // { productId, name, unitPrice, taxRate, quantity, stock }
@@ -186,7 +188,7 @@ document.getElementById('checkoutBtn').addEventListener('click', async () => {
     });
 
     document.getElementById('invoiceNoText').textContent = res.data.invoiceNo;
-   document.getElementById('viewReceiptBtn').href = `${API_BASE_URL}/receipts/${res.data._id}?token=${Api.getToken()}`;
+    document.getElementById('viewReceiptBtn').href = `${API_BASE_URL}/receipts/${res.data._id}`;
     new bootstrap.Modal(document.getElementById('receiptModal')).show();
 
     // reset for next sale
