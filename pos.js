@@ -190,37 +190,21 @@ document.getElementById('checkoutBtn').addEventListener('click', async () => {
     document.getElementById('invoiceNoText').textContent = res.data.invoiceNo;
     document.getElementById('viewReceiptBtn').href = `${API_BASE_URL}/receipts/${res.data._id}`;
     new bootstrap.Modal(document.getElementById('receiptModal')).show();
-
+    
 
     // reset for next sale
     cart = [];
     document.getElementById('discountInput').value = 0;
     document.getElementById('amountPaid').value = '';
     renderCart();
-    loadProducts();// refresh stock counts
-
-    
-    try {
-  document.getElementById('invoiceNoText').textContent = res.data.invoiceNo;
-  document.getElementById('viewReceiptBtn').href = `${API_BASE_URL}/receipts/${res.data._id}?token=${Api.getToken()}`;
-  const modalEl = document.getElementById('receiptModal');
-  if (modalEl) {
-    bootstrap.Modal.getOrCreateInstance(modalEl).show();
-  } else {
-    showToast(`Sale completed - Invoice ${res.data.invoiceNo}`, 'success');
-  }
-} catch (modalErr) {
-  showToast(`Sale completed - Invoice ${res.data.invoiceNo}`, 'success');
-}
-
-
+    loadProducts(); // refresh stock counts
   } catch (err) {
     showToast(err.message, 'error');
   } finally {
     btn.disabled = false;
     btn.innerHTML = '<i class="bi bi-check2-circle"></i> Complete Sale';
   }
-
+  
 });
 
 
