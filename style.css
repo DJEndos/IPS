@@ -1,0 +1,184 @@
+/* ============================================================
+   Inventory & POS System — Design Tokens
+   Identity: a till-tape ledger, not a marketing page.
+   Palette: deep ledger-ink navy + naira-green + warm receipt paper
+   ============================================================ */
+
+:root {
+  --ink-900: #0f1b2d;      /* deep navy - headers, primary text */
+  --ink-700: #1c2f47;      /* panels */
+  --ink-500: #3a5170;      /* muted labels */
+  --paper: #fbf9f4;        /* warm receipt-paper background */
+  --paper-line: #e6e1d6;   /* hairline rules on paper */
+  --naira-600: #0f7a4d;    /* primary action / positive (money in) */
+  --naira-700: #0b5f3c;
+  --alert-600: #b3401f;    /* voids, low stock, negative */
+  --amber-500: #c8862a;    /* pending / attention */
+  --mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+  --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+}
+
+body {
+  font-family: var(--sans);
+  background-color: var(--paper);
+  color: var(--ink-900);
+}
+
+/* Ledger-style numerals wherever money or codes appear */
+.figure, .sku-code, .invoice-code, table td.num {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Top app bar */
+.pos-navbar {
+  background-color: var(--ink-900);
+  border-bottom: 3px solid var(--naira-600);
+}
+.pos-navbar .navbar-brand {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+.pos-navbar .navbar-brand .tag {
+  color: var(--naira-600);
+}
+
+/* Sidebar */
+.pos-sidebar {
+  background: var(--ink-700);
+  min-height: 100vh;
+}
+.pos-sidebar .nav-link {
+  color: #cdd7e2;
+  border-left: 3px solid transparent;
+  border-radius: 0;
+  padding: 0.65rem 1rem;
+}
+.pos-sidebar .nav-link.active,
+.pos-sidebar .nav-link:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+  border-left-color: var(--naira-600);
+}
+.pos-sidebar .nav-link i { width: 1.25rem; display: inline-block; }
+
+/* Cards -- receipt-like, hairline edges instead of heavy shadows */
+.card {
+  border: 1px solid var(--paper-line);
+  border-radius: var(--radius-md);
+  box-shadow: none;
+}
+.card-stat {
+  border-left: 4px solid var(--naira-600);
+}
+.card-stat.warn { border-left-color: var(--amber-500); }
+.card-stat.danger { border-left-color: var(--alert-600); }
+
+.card-stat .stat-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-500);
+}
+.card-stat .stat-value {
+  font-family: var(--mono);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--ink-900);
+}
+
+/* Buttons */
+.btn-naira {
+  background-color: var(--naira-600);
+  border-color: var(--naira-600);
+  color: #fff;
+}
+.btn-naira:hover { background-color: var(--naira-700); border-color: var(--naira-700); color: #fff; }
+.btn-outline-navy {
+  border-color: var(--ink-900);
+  color: var(--ink-900);
+}
+.btn-outline-navy:hover { background-color: var(--ink-900); color: #fff; }
+
+/* Login page */
+.login-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(15, 122, 77, 0.12), transparent 40%),
+    var(--ink-900);
+}
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--paper);
+  border-radius: var(--radius-md);
+  padding: 2.25rem;
+}
+.login-card .brand-mark {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--naira-600);
+}
+
+/* POS checkout grid */
+.pos-product-tile {
+  cursor: pointer;
+  border: 1px solid var(--paper-line);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem;
+  transition: border-color 0.15s ease, transform 0.1s ease;
+  background: #fff;
+}
+.pos-product-tile:hover {
+  border-color: var(--naira-600);
+  transform: translateY(-1px);
+}
+.pos-product-tile .price {
+  font-family: var(--mono);
+  font-weight: 700;
+  color: var(--naira-700);
+}
+.pos-product-tile .stock-pill {
+  font-size: 0.68rem;
+  padding: 0.1rem 0.4rem;
+}
+
+.cart-panel {
+  background: #fff;
+  border: 1px solid var(--paper-line);
+  border-radius: var(--radius-md);
+}
+.cart-line + .cart-line { border-top: 1px dashed var(--paper-line); }
+
+.receipt-total {
+  border-top: 2px dashed var(--ink-900);
+  padding-top: 0.5rem;
+  font-family: var(--mono);
+}
+
+/* Status badges */
+.badge-low   { background-color: var(--alert-600); }
+.badge-ok    { background-color: var(--naira-600); }
+.badge-pending { background-color: var(--amber-500); }
+
+/* Utility */
+.text-naira { color: var(--naira-700); }
+.text-muted-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-500);
+}
+
+@media (max-width: 767.98px) {
+  .pos-sidebar { min-height: auto; }
+}
