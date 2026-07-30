@@ -301,7 +301,7 @@ async function loadSales() {
       <td><span class="badge ${s.status === 'completed' ? 'badge-ok' : 'badge-low'}">${s.status}</span></td>
       <td>${new Date(s.createdAt).toLocaleString()}</td>
       <td>
-        <a href="${API_BASE_URL}/receipts/${s._id}" target="_blank" class="btn btn-sm btn-outline-navy"><i class="bi bi-receipt"></i></a>
+     <a href="${API_BASE_URL}/receipts/${s._id}?token=${Api.getToken()}" target="_blank" class="btn btn-sm btn-outline-navy"><i class="bi bi-receipt"></i></a>
         ${s.status === 'completed' ? `<button class="btn btn-sm btn-outline-danger" onclick="voidSale('${s._id}')">Void</button>` : ''}
       </td>
     </tr>

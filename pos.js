@@ -188,7 +188,7 @@ document.getElementById('checkoutBtn').addEventListener('click', async () => {
     });
 
     document.getElementById('invoiceNoText').textContent = res.data.invoiceNo;
-    document.getElementById('viewReceiptBtn').href = `${API_BASE_URL}/receipts/${res.data._id}`;
+    document.getElementById('viewReceiptBtn').href = `${API_BASE_URL}/receipts/${res.data._id}?token=${Api.getToken()}`;
     new bootstrap.Modal(document.getElementById('receiptModal')).show();
 
     // reset for next sale
