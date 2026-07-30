@@ -193,11 +193,7 @@ document.getElementById('checkoutBtn').addEventListener('click', async () => {
     
 
     // reset for next sale
- cart = [];
-document.getElementById('discountInput').value = 0;
-document.getElementById('amountPaid').value = '';
-renderCart();
-loadProducts(); 
+
 cart = [];
 document.getElementById('discountInput').value = 0;
 document.getElementById('amountPaid').value = '';
@@ -206,17 +202,7 @@ loadProducts();
  } catch (modalErr) {
   showToast(`Sale completed - Invoice ${res.data.invoiceNo}`, 'success');
 }
-  
-});
 
-// Reset the till FIRST, so a broken modal can never block this from running
-cart = [];
-document.getElementById('discountInput').value = 0;
-document.getElementById('amountPaid').value = '';
-renderCart();
-loadProducts(); // refresh stock counts
-
-// Show the confirmation modal - wrapped so a UI issue here can't freeze the page
 try {
   document.getElementById('invoiceNoText').textContent = res.data.invoiceNo;
   document.getElementById('viewReceiptBtn').href = `${API_BASE_URL}/receipts/${res.data._id}?token=${Api.getToken()}`;
@@ -229,5 +215,8 @@ try {
 } catch (modalErr) {
   showToast(`Sale completed - Invoice ${res.data.invoiceNo}`, 'success');
 }
+  
+});
+
 
 loadProducts();
