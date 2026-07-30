@@ -188,19 +188,19 @@ document.getElementById('checkoutBtn').addEventListener('click', async () => {
     });
 
     document.getElementById('invoiceNoText').textContent = res.data.invoiceNo;
-    document.getElementById('viewReceiptBtn').href = `${API_BASE_URL}/receipts/${res.data._id}?token=${Api.getToken()}`;
+    document.getElementById('viewReceiptBtn').href = `${API_BASE_URL}/receipts/${res.data._id}`;
     new bootstrap.Modal(document.getElementById('receiptModal')).show();
 
-    // reset for next sale
-  
-cart = [];
-document.getElementById('discountInput').value = 0;
-document.getElementById('amountPaid').value = '';
-renderCart();
-loadProducts(); // refresh stock counts
 
-// Show the confirmation modal - wrapped so a UI issue here can't freeze the page
-try {
+    // reset for next sale
+    cart = [];
+    document.getElementById('discountInput').value = 0;
+    document.getElementById('amountPaid').value = '';
+    renderCart();
+    loadProducts();// refresh stock counts
+
+    
+    try {
   document.getElementById('invoiceNoText').textContent = res.data.invoiceNo;
   document.getElementById('viewReceiptBtn').href = `${API_BASE_URL}/receipts/${res.data._id}?token=${Api.getToken()}`;
   const modalEl = document.getElementById('receiptModal');
@@ -212,5 +212,16 @@ try {
 } catch (modalErr) {
   showToast(`Sale completed - Invoice ${res.data.invoiceNo}`, 'success');
 }
+
+
+  } catch (err) {
+    showToast(err.message, 'error');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="bi bi-check2-circle"></i> Complete Sale';
+  }
+
+});
+
 
 loadProducts();
