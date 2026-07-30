@@ -55,11 +55,11 @@ const Api = {
       data = { success: false, message: 'Unexpected server response' };
     }
 
-    if (response.status === 401) {
-      this.clearSession();
-      window.location.href = 'index.html?sessionExpired=1';
-      throw new Error('Session expired');
-    }
+  if (response.status === 401 && !path.includes('/auth/login')) {
+  this.clearSession();
+  window.location.href = 'index.html?sessionExpired=1';
+  throw new Error('Session expired');
+}
 
     if (!response.ok || data.success === false) {
       throw new Error(data.message || 'Something went wrong');
