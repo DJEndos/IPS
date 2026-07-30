@@ -209,5 +209,25 @@ loadProducts();
   
 });
 
+// Reset the till FIRST, so a broken modal can never block this from running
+cart = [];
+document.getElementById('discountInput').value = 0;
+document.getElementById('amountPaid').value = '';
+renderCart();
+loadProducts(); // refresh stock counts
+
+// Show the confirmation modal - wrapped so a UI issue here can't freeze the page
+try {
+  document.getElementById('invoiceNoText').textContent = res.data.invoiceNo;
+  document.getElementById('viewReceiptBtn').href = `${API_BASE_URL}/receipts/${res.data._id}?token=${Api.getToken()}`;
+  const modalEl = document.getElementById('receiptModal');
+  if (modalEl) {
+    bootstrap.Modal.getOrCreateInstance(modalEl).show();
+  } else {
+    showToast(`Sale completed - Invoice ${res.data.invoiceNo}`, 'success');
+  }
+} catch (modalErr) {
+  showToast(`Sale completed - Invoice ${res.data.invoiceNo}`, 'success');
+}
 
 loadProducts();
