@@ -193,17 +193,19 @@ document.getElementById('checkoutBtn').addEventListener('click', async () => {
     
 
     // reset for next sale
-    cart = [];
-    document.getElementById('discountInput').value = 0;
-    document.getElementById('amountPaid').value = '';
-    renderCart();
-    loadProducts(); // refresh stock counts
-  } catch (err) {
-    showToast(err.message, 'error');
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = '<i class="bi bi-check2-circle"></i> Complete Sale';
-  }
+ cart = [];
+document.getElementById('discountInput').value = 0;
+document.getElementById('amountPaid').value = '';
+renderCart();
+loadProducts(); 
+cart = [];
+document.getElementById('discountInput').value = 0;
+document.getElementById('amountPaid').value = '';
+renderCart();
+loadProducts(); 
+ } catch (modalErr) {
+  showToast(`Sale completed - Invoice ${res.data.invoiceNo}`, 'success');
+}
   
 });
 
