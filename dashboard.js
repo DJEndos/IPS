@@ -5,6 +5,7 @@ renderUserBadge();
 if (currentUser.role !== 'admin') {
   document.querySelector('[data-panel="users"]')?.parentElement.remove();
 }
+<a href="${API_BASE_URL}/receipts/${s._id}?token=${Api.getToken()}" target="_blank" class="btn btn-sm btn-outline-navy"><i class="bi bi-receipt"></i></a>
 
 // ---------- Panel switching ----------
 document.querySelectorAll('[data-panel]').forEach((link) => {
