@@ -1,3 +1,4 @@
+document.getElementById('viewReceiptBtn').href = `${API_BASE_URL}/receipts/${res.data._id}?token=${Api.getToken()}`;
 requireAuth(['cashier', 'manager', 'admin']);
 renderUserBadge();
 
